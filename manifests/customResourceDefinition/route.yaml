@@ -1,0 +1,33 @@
+apiVersion: tf-gapi.lukerops.com/v1alpha1
+kind: CustomResourceDefinition
+metadata:
+  name: route.token-router.lukerops.com
+spec:
+  group: token-router.lukerops.com
+  kind: Route
+  versions:
+    - name: v1alpha1
+      specSchema:
+        type: object
+        properties:
+          sourceRef:
+            type: object
+            properties:
+              apiGroup:
+                type: string
+              kind:
+                type: string
+              name:
+                type: string
+          destinations:
+            type: array
+            minItems: 1
+            items:
+              type: object
+              properties:
+                apiGroup:
+                  type: string
+                kind:
+                  type: string
+                name:
+                  type: string
