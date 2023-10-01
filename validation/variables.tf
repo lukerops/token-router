@@ -1,3 +1,0 @@
-variable "resources" {
-  type = any
-}
