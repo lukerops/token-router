@@ -1,5 +1,8 @@
 locals {
-  serviceAccountKey = try(local.kinds["ServiceAccountKey"], {})
+  serviceAccountKey = try({
+    for name, resource in local.kinds["ServiceAccountKey"] : name => resource
+    if resource.spec.projectId == var.project_id
+  }, {})
   serviceAccountKey_v1alpha1 = {
     for name, resource in local.serviceAccountKey : name => resource
     if resource.apiVersionName == "v1alpha1"

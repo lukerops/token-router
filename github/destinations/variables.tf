@@ -12,3 +12,7 @@ variable "sources_data" {
     })
   )))
 }
+
+variable "organization" {
+  type = string
+}

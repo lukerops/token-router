@@ -1,7 +1,10 @@
 locals {
   kinds = try(var.resources["github.token-router.lukerops.com"], {})
 
-  actionsSecret = try(local.kinds["ActionsSecret"], {})
+  actionsSecret = try({
+    for name, resource in local.kinds["ActionsSecret"] : name => resource
+    if resource.spec.organization == var.organization
+  }, {})
   actionsSecret_sources = try({
     for resource in values(local.actionsSecret) : resource.metadata.name => [
       for route in values(var.resources["token-router.lukerops.com"]["Route"]) : route.spec.sourceRef
