@@ -1,0 +1,31 @@
+apiVersion: gcp.token-router.lukerops.com/v1alpha1
+kind: ServiceAccountKey
+metadata:
+  name: test-sa
+spec:
+  accountId: test-sa
+  projectId: your-project-id
+  rotationDays: 30
+---
+apiVersion: github.token-router.lukerops.com/v1alpha1
+kind: ActionsSecret
+metadata:
+  name: google-application-credentials-test-repo
+spec:
+  secretName: GOOGLE_APPLICATION_CREDENTIALS
+  repository: test-repo
+  organization: your-github-org
+---
+apiVersion: token-router.lukerops.com/v1alpha1
+kind: Route
+metadata:
+  name: google-application-credentials-test-repo
+spec:
+  sourceRef:
+    apiGroup: gcp.token-router.lukerops.co
+    kind: ServiceAccountKey
+    name: test-sa
+  destinations:
+    - apiGroup: github.token-router.lukerops.com
+      kind: ActionsSecret
+      name: google-application-credentials-test-repo
