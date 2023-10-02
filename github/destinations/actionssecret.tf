@@ -30,7 +30,7 @@ data "github_repository" "v1alpha1" {
 resource "github_actions_secret" "v1alpha1" {
   for_each = local.actionsSecret_v1alpha1
 
-  repository  = data.github_resitory.v1alpha1[each.key].name
+  repository  = data.github_repository.v1alpha1[each.key].name
   secret_name = each.value.spec.secretName
   plaintext_value = coalesce([
     for sourceRef in local.actionsSecret_sources[each.key] :
