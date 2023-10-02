@@ -8,7 +8,7 @@ output "data" {
             apiGroup = "gcp.token-router.lukerops.com"
             kind     = "ServiceAccountKey"
             name     = name
-            data     = source.private_key
+            data     = base64decode(source.private_key)
           }
         },
       )
