@@ -5,5 +5,9 @@ locals {
 }
 
 output "manifests" {
-  value = concat(local.manifests, local.gcp_manifests, local.github_manifests)
+  value = flatten([
+    local.manifests,
+    local.gcp_manifests,
+    local.github_manifests,
+  ])
 }
