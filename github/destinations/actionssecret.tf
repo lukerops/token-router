@@ -34,6 +34,6 @@ resource "github_actions_secret" "v1alpha1" {
   secret_name = each.value.spec.secretName
   plaintext_value = coalesce([
     for sourceRef in local.actionsSecret_sources[each.key] :
-    var.resources[sourceRef.apiGroup][sourceRef.kind][sourceRef.name].data
+    var.sources_data[sourceRef.apiGroup][sourceRef.kind][sourceRef.name].data
   ])
 }
