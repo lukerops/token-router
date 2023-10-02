@@ -15,7 +15,7 @@ locals {
 }
 
 output "resources" {
-  value = var.resources
+  value = module.tf_gapi.resources
 
   precondition {
     condition     = alltrue(local.source_verification)
